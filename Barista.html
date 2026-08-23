@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Curso completo de Barista de 0 a Pro: guía práctica interactiva, técnicas de espresso, arte latte y consejos de profesionales sin dependencias externas.">
+    <meta name="keywords" content="barista, café, espresso, latte art, extraccion de cafe, molido de cafe, curso de barista">
+    <meta name="author" content="Barista Academy Pro">
+    <meta name="robots" content="index, follow">
+    <title>Academia Barista Pro: De 0 a Profesional | Guía Completa</title>
+
+    <style>
+        :root {
+            --bg-main: #0f0d0c;
+            --bg-card: #1a1715;
+            --bg-card-hover: #24201d;
+            --primary: #d4a373;
+            --primary-hover: #faedcd;
+            --text-main: #fefae0;
+            --text-muted: #a39b8b;
+            --accent: #bc6c25;
+            --border: #332c27;
+            --success: #2a9d8f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 1.5rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background-color: var(--border);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .sidebar h2 {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .module-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .module-btn {
+            width: 100%;
+            text-align: left;
+            padding: 0.8rem 1rem;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--text-main);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-btn:hover {
+            background-color: var(--bg-card-hover);
+        }
+
+        .module-btn.active {
+            background-color: var(--primary);
+            color: var(--bg-main);
+            font-weight: 700;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            background: var(--border);
+            color: var(--text-main);
+        }
+
+        .module-btn.active .badge {
+            background: var(--bg-main);
+            color: var(--primary);
+        }
+
+        /* Content Area */
+        .content {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 1.5rem;
+            }
+        }
+
+        .module-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .module-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .section-block {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-block h3 {
+            font-size: 1.3rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .info-card {
+            background-color: var(--bg-card-hover);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Pro Tip Box */
+        .pro-tip {
+            background-color: rgba(188, 108, 37, 0.15);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .pro-tip-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* Guided Practice Interactive Box */
+        .practice-box {
+            background-color: #14201d;
+            border: 1px solid var(--success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .practice-box h4 {
+            color: var(--success);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .practice-steps {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .practice-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            cursor: pointer;
+        }
+
+        .practice-step input[type="checkbox"] {
+            margin-top: 0.3rem;
+            accent-color: var(--success);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* Timer Widget */
+        .timer-widget {
+            margin-top: 1.5rem;
+            background: var(--bg-card-hover);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .timer-display {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-mono: monospace;
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--bg-main);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: var(--border);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>☕</span> Academia Barista Pro
+            </a>
+            <span id="completion-text" style="font-size: 0.9rem; color: var(--text-muted);">Progreso: 0%</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Navegación lateral -->
+        <aside class="sidebar">
+            <h2>Módulos del Curso</h2>
+            <ul class="module-list" id="module-list">
+                <!-- Inyectado por JS -->
+            </ul>
+        </aside>
+
+        <!-- Contenido principal -->
+        <section class="content" id="module-content">
+            <!-- Inyectado por JS -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Academia Barista Pro. Diseñado para aprendizaje profesional sin dependencias externas.</p>
+    </footer>
+
+    <script>
+        // Datos del Curso Completo
+        const modules = [
+            {
+                id: "mod1",
+                title: "1. El Grano y la Botánica",
+                subtitle: "Fundamentos sensoriales, varietales y procesos de origen.",
+                content: `
+                    <div class="section-block">
+                        <h3>Arábica vs. Robusta</h3>
+                        <p>Para ser un barista profesional, debes comprender la materia prima. Todo comienza en la planta de cafeto.</p>
+                        <div class="grid-2">
+                            <div class="info-card">
+                                <h4>Coffea Arabica</h4>
+                                <p>Cultivada a mayor altura (800 - 2200m). Posee mayor acidez, complejidad aromática, dulzor y 50% menos cafeína que Robusta.</p>
+                            </div>
+                            <div class="info-card">
+                                <h4>Coffea Canephora (Robusta)</h4>
+                                <p>Cultivada a menor altura. Aporta más cuerpo, crema espesa, notas amargas/amaderadas y el doble de cafeína. Ideal para blends tradicionales.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-block">
+                        <h3>Procesos de Beneficiado</h3>
+                        <p>El método con el que se retira la pulpa del fruto altera drásticamente el perfil en taza:</p>
+                        <ul>
+                            <li><strong>Lavado (Washed):</strong> Taza limpia, alta acidez y notas florales/frutales.</li>
+                            <li><strong>Natural (Dry):</strong> El grano se seca con la cereza. Taza con cuerpo denso, baja acidez y dulzor afrutado intenso.</li>
+                            <li><strong>Honey:</strong> Proceso intermedio. Deja parte del mucílago; aporta notas acarameladas y acidez media.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pro-tip">
+                        <span class="pro-tip-icon">💡</span>
+                        <div>
+                            <strong>Tip Pro de Tueste:</strong> Para espresso, busca un tueste <em>Medio (City+)</em> realizado entre 10 y 21 días antes de usarlo. Si el café está demasiado fresco (menos de 7 días), el exceso de CO2 generará burbujas en la crema e inestabilidad en la extracción.
+                        </div>
+                    </div>
+                `,
+                practice: {
+                    title: "Práctica Guiada: Cata Triangular y Selección",
+                    steps: [
+                        "Examina la etiqueta de tu bolsa de café: ubica fecha de tueste, origen y método de beneficio.",
+                        "Huele el café recién molido (aroma en seco) y anota si percibes notas dulces, ácidas o tostadas.",
+                        "Prepara una infusión básica por cristalización/inmersión para identificar la diferencia entre acidez pura y amargor."
+                    ],
+                    timer: false
+                }
+            },
+            {
+                id: "mod2",
+                title: "2. Molienda y Calibración",
+                subtitle: "Dominando la variable más crítica del barista.",
+                content: `
+                    <div class="section-block">
+                        <h3>Tipos de Molino</h3>
+                        <p>Jamás uses molinos de cuchillas. Un barista trabaja exclusivamente con <strong>molinos de muelas (muelas planas o cónicas)</strong> para garantizar un tamaño de partícula uniforme.</p>
+                    </div>
+
+                    <div class="section-block">
+                        <h3>Física del Ajuste de Molienda</h3>
+                        <div class="grid-2">
+                            <div class="info-card">
+                                <h4>Molienda Fina (Sub-extracción)</h4>
+                                <p>Si el agua pasa demasiado rápido (menos de 20s), la molienda es gruesa. Taza agria, salada y sin cuerpo.</p>
+                            </div>
+                            <div class="info-card">
+                                <h4>Molienda Correcta (Extracción Ideal)</h4>
+                                <p>Paso uniforme del agua en 25 a 30 segundos. Taza balanceada, dulce, con acidez agradable y retrogusto prolongado.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pro-tip">
+                        <span class="pro-tip-icon">💡</span>
+                        <div>
+                            <strong>Tip Pro de Distribución:</strong> Antes de compactar, usa la técnica WDT (Weiss Distribution Technique) agitando la molienda con agujas finas para eliminar grumos y evitar el <em>channelling</em> (canalización del agua).
+                        </div>
+                    </div>
+                `,
+                practice: {
+                    title: "Práctica Guiada: Calibración del Dose & Tamp",
+                    steps: [
+                        "Pesa exactamente 18g de café en tu portafiltro (Dosis estándar doble).",
+                        "Aplica distribución uniforme asegurándote de que la cama de café quede totalmente plana.",
+                        "Ejerce una presión de compactado (tamping) firme y nivelada (~15 kg de fuerza) hasta sentir la resistencia total.",
+                        "Inspecciona la pastilla de café: debe quedar lisa, sin grietas laterales."
+                    ],
+                    timer: false
+                }
+            },
+            {
+                id: "mod3",
+                title: "3. Extracción de Espresso Pro",
+                subtitle: "Técnica, variables físicas y la regla de oro 1:2.",
+                content: `
+                    <div class="section-block">
+                        <h3>La Fórmula del Espresso Perfecto</h3>
+                        <p>El espresso es una bebida concentrada (25-35ml) obtenida pasando agua a 90-96°C y 9 bares de presión a través de café compactado.</p>
+                        <br>
+                        <p><strong>Ratio de Extracción Estándar (1:2):</strong></p>
+                        <ul>
+                            <li><strong>Entrada (In):</strong> 18g de café molido.</li>
+                            <li><strong>Salida (Out):</strong> 36g de bebida líquida en taza.</li>
+                            <li><strong>Tiempo:</strong> 25 a 30 segundos.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pro-tip">
+                        <span class="pro-tip-icon">💡</span>
+                        <div>
+                            <strong>Tip Pro de Barista:</strong> No evalúes el espresso por el volumen en mililitros, sino por <strong>peso en gramos</strong> usando una báscula gramera. La crema puede engañar sobre el volumen real del líquido.
+                        </div>
+                    </div>
+                `,
+                practice: {
+                    title: "Práctica Guiada: Extracción de Espresso con Cronómetro",
+                    steps: [
+                        "Purga el grupo de la máquina de espresso durante 2 segundos.",
+                        "Inserta el portafiltro previamente cargado (18g) e inicia el flujo y el cronómetro de forma simultánea.",
+                        "Observa la caída: debe iniciar entre el segundo 4 y 7 con la forma de 'cola de ratón' de color avellana.",
+                        "Corta la extracción exactamente al alcanzar los 36g en la taza."
+                    ],
+                    timer: true,
+                    targetTime: 28
+                }
+            },
+            {
+                id: "mod4",
+                title: "4. Texturizado de Leche y Microespuma",
+                subtitle: "Transformando la leche en crema sedosa para Latte Art.",
+                content: `
+                    <div class="section-block">
+                        <h3>Las Dos Fases de la Texturización</h3>
+                        <p>Trabaja preferentemente con leche entera fría (4°C) para mayor estabilidad de las proteínas y grasas.</p>
+                        <div class="grid-2">
+                            <div class="info-card">
+                                <h4>Fase 1: Estirado (Introducir Aire)</h4>
+                                <p>Coloca la punta de la lanceta justo en la superficie de la leche. Abre el vapor al máximo. Escucharás un siseo suave ("chtt-chtt"). Realiza esto hasta que la leche alcance la temperatura corporal (37°C).</p>
+                            </div>
+                            <div class="info-card">
+                                <h4>Fase 2: Integración (Remolino)</h4>
+                                <p>Sumerge la lanceta 1 cm más abajo e inclina la jarra para crear un vórtice/remolino. Rompe las burbujas grandes hasta alcanzar los 60°C - 65°C max.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pro-tip">
+                        <span class="pro-tip-icon">💡</span>
+                        <div>
+                            <strong>Tip Pro de Seguridad y Calidad:</strong> Nunca sobrepases los 70°C. A esta temperatura las proteínas se desnaturalizan, la leche adquiere sabor a "cocido" o quemado y pierde su dulzor natural (lactosa).
+                        </div>
+                    </div>
+                `,
+                practice: {
+                    title: "Práctica Guiada: Texturizado Sedoso",
+                    steps: [
+                        "Lena 1/3 de la jarra de acero inoxidable con leche fría.",
+                        "Purga la lanceta de vapor antes de introducirla.",
+                        "Genera el vórtice hasta lograr una textura brillante similar a la pintura líquida.",
+                        "Limpia la lanceta inmediatamente con un trapo húmedo y purga de nuevo."
+                    ],
+                    timer: true,
+                    targetTime: 12
+                }
+            },
+            {
+                id: "mod5",
+                title: "5. Trazos Fundamentales de Latte Art",
+                subtitle: "Técnica de vertido, altura y control del flujo.",
+                content: `
+                    <div class="section-block">
+                        <h3>Principios del Vertido</h3>
+                        <p>El Latte Art no es solo estética, es la prueba de una emulsión de leche y espresso técnicamente perfecta.</p>
+                        <ul>
+                            <li><strong>Vertido Alto (Lienzo):</strong> A 10-15 cm de altura para que la leche se hunda debajo de la crema del espresso.</li>
+                            <li><strong>Vertido Bajo (Diseño):</strong> A 1 cm de la crema para que la microespuma blanca flote sobre la superficie.</li>
+                            <li><strong>Corte Final:</strong> Eleva la jarra y cruza el diseño con un hilo fino de leche para dar simetría.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pro-tip">
+                        <span class="pro-tip-icon">💡</span>
+                        <div>
+                            <strong>Tip Pro de Diseño:</strong> Inicia practicando el "Corazón" básico. Dominar la simetría y el corte del corazón es la base indispensable para hacer Rosettas, Tulipanes y Cisnes.
+                        </div>
+                    </div>
+                `,
+                practice: {
+                    title: "Práctica Guiada: Vertido del Corazón",
+                    steps: [
+                        "Integra el espresso girando la taza ligeramente para homogeneizar la crema.",
+                        "Vierte a 10cm de altura para crear una base marrón uniforme hasta llenar 1/2 taza.",
+                        "Baja la boquilla de la jarra al centro de la taza, toca casi el líquido y aumenta el flujo para crear una mancha blanca.",
+                        "Mantén la posición mientras la mancha expande, luego eleva la jarra y cruza hacia adelante para cortar el corazón."
+                    ],
+                    timer: false
+                }
+            },
+            {
+                id: "mod6",
+                title: "6. Mantenimiento y Rutina Pro",
+                subtitle: "Higiene, protocolo de barra y servicio de alto nivel.",
+                content: `
+                    <div class="section-block">
+                        <h3>Mantenimiento Técnico Diario</h3>
+                        <p>Un gran barista se distingue por la pulcritud absoluta de su estación de trabajo.</p>
+                        <ul>
+                            <li><strong>Backflush (Retrolavado):</strong> Lavado diario de los grupos con filtro ciego y detergente especializado para remover aceites de café oxidado.</li>
+                            <li><strong>Boquillas de vapor:</strong> Mantener libre de incrustaciones de leche residual. Purga obligatoria antes y después de cada uso.</li>
+                            <li><strong>Limpieza de muelas del molino:</strong> Cepillado diario de la tolva y cámara de molienda.</li>
+                        </ul>
+                    </div>
+
+                    <div class="pro-tip">
+                        <span class="pro-tip-icon">💡</span>
+                        <div>
+                            <strong>Tip Pro de Eficiencia:</strong> Mantén siempre dos trapos de microfibra dedicados exclusivamente: uno <em>húmedo únicamente para la lanceta de vapor</em> y otro <em>seco únicamente para limpiar el portafiltro</em>. Nunca los cruces.
+                        </div>
+                    </div>
+                `,
+                practice: {
+                    title: "Práctica Guiada: Cierre de Barra Perfecto",
+                    steps: [
+                        "Realiza el retrolavado (Backflush) de la máquina de espresso con químico limpiador.",
+                        "Desarma los portafiltros y limpia canastillas removiendo todo sedimento.",
+                        "Vacía y limpia la tolva del molino para evitar que los aceites se rancien overnight.",
+                        "Desinfecta la superficie de trabajo y deja las duchas de la máquina impecables."
+                    ],
+                    timer: false
+                }
+            }
+        ];
+
+        // Estado de la App
+        let currentModuleIndex = 0;
+        let completedSteps = JSON.parse(localStorage.getItem('barista_completed_steps')) || {};
+        let timerInterval = null;
+        let timerSeconds = 0;
+
+        // Elementos DOM
+        const moduleListEl = document.getElementById('module-list');
+        const moduleContentEl = document.getElementById('module-content');
+        const progressBarEl = document.getElementById('progress-bar');
+        const completionTextEl = document.getElementById('completion-text');
+
+        // Inicializar App
+        function initApp() {
+            renderSidebar();
+            renderModule(currentModuleIndex);
+            updateGlobalProgress();
+        }
+
+        // Renderizar Lista Lateral
+        function renderSidebar() {
+            moduleListEl.innerHTML = '';
+            modules.forEach((mod, index) => {
+                const li = document.createElement('li');
+                const btn = document.createElement('button');
+                btn.className = `module-btn ${index === currentModuleIndex ? 'active' : ''}`;
+                
+                // Calcular progreso individual del módulo
+                const modSteps = mod.practice.steps;
+                let doneCount = 0;
+                modSteps.forEach((_, sIdx) => {
+                    if (completedSteps[`${mod.id}_${sIdx}`]) doneCount++;
+                });
+
+                btn.innerHTML = `
+                    <span>${mod.title}</span>
+                    <span class="badge">${doneCount}/${modSteps.length}</span>
+                `;
+                btn.onclick = () => {
+                    currentModuleIndex = index;
+                    renderSidebar();
+                    renderModule(currentModuleIndex);
+                };
+                li.appendChild(btn);
+                moduleListEl.appendChild(li);
+            });
+        }
+
+        // Renderizar Módulo Seleccionado
+        function renderModule(index) {
+            const mod = modules[index];
+            
+            let practiceHTML = `
+                <div class="practice-box">
+                    <h4><span>📋</span> ${mod.practice.title}</h4>
+                    <div class="practice-steps">
+            `;
+
+            mod.practice.steps.forEach((step, sIdx) => {
+                const isChecked = completedSteps[`${mod.id}_${sIdx}`] ? 'checked' : '';
+                practiceHTML += `
+                    <label class="practice-step">
+                        <input type="checkbox" ${isChecked} onchange="toggleStep('${mod.id}', ${sIdx})">
+                        <span>${step}</span>
+                    </label>
+                `;
+            });
+
+            if (mod.practice.timer) {
+                practiceHTML += `
+                    <div class="timer-widget">
+                        <div>
+                            <div style="font-size:0.85rem; color:var(--text-muted);">Cronómetro de Práctica</div>
+                            <div class="timer-display" id="timer-display">00:00</div>
+                        </div>
+                        <div style="display:flex; gap:0.5rem;">
+                            <button class="btn btn-primary" onclick="startTimer()">Iniciar</button>
+                            <button class="btn btn-outline" onclick="stopTimer()">Detener</button>
+                            <button class="btn btn-outline" onclick="resetTimer()">Reset</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            practiceHTML += `</div></div>`;
+
+            moduleContentEl.innerHTML = `
+                <h1 class="module-title">${mod.title}</h1>
+                <div class="module-subtitle">${mod.subtitle}</div>
+                ${mod.content}
+                ${practiceHTML}
+            `;
+
+            resetTimer();
+        }
+
+        // Marcar/Desmarcar Paso de Práctica
+        window.toggleStep = function(modId, stepIndex) {
+            const key = `${modId}_${stepIndex}`;
+            if (completedSteps[key]) {
+                delete completedSteps[key];
+            } else {
+                completedSteps[key] = true;
+            }
+            localStorage.setItem('barista_completed_steps', JSON.stringify(completedSteps));
+            renderSidebar();
+            updateGlobalProgress();
+        };
+
+        // Actualizar Barra de Progreso Global
+        function updateGlobalProgress() {
+            let totalSteps = 0;
+            let completedCount = 0;
+
+            modules.forEach(mod => {
+                mod.practice.steps.forEach((_, sIdx) => {
+                    totalSteps++;
+                    if (completedSteps[`${mod.id}_${sIdx}`]) {
+                        completedCount++;
+                    }
+                });
+            });
+
+            const percentage = totalSteps === 0 ? 0 : Math.round((completedCount / totalSteps) * 100);
+            progressBarEl.style.width = `${percentage}%`;
+            completionTextEl.textContent = `Progreso: ${percentage}% Completado`;
+        }
+
+        // Lógica del Cronómetro
+        window.startTimer = function() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                updateTimerDisplay();
+            }, 1000);
+        };
+
+        window.stopTimer = function() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        };
+
+        window.resetTimer = function() {
+            stopTimer();
+            timerSeconds = 0;
+            updateTimerDisplay();
+        };
+
+        function updateTimerDisplay() {
+            const displayEl = document.getElementById('timer-display');
+            if (!displayEl) return;
+            const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+            const secs = String(timerSeconds % 60).padStart(2, '0');
+            displayEl.textContent = `${mins}:${secs}`;
+        }
+
+        // Arrancar Aplicación
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
