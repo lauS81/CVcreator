@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Metadatos SEO Básicos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aprende HTML de 0 a Pro con este curso interactivo completo: teoría, mejores prácticas profesionales y ejercicios en tiempo real.">
+    <meta name="keywords" content="Aprender HTML, Curso HTML gratis, HTML5, Desarrollo Web, Aprender a programar, HTML Pro">
+    <meta name="author" content="HTML Academy Zero to Pro">
+    <title>Curso Interactivo: HTML de 0 a Pro</title>
+
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-sidebar: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0284c7;
+            --success: #22c55e;
+            --warning: #eab308;
+            --border: #334155;
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-code: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Layout Responsivo */
+        .app-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        aside {
+            width: 300px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            z-index: 10;
+        }
+
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Sidebar Header y Progreso */
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .search-box {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-main);
+            color: var(--text-main);
+        }
+
+        /* Lista de Módulos */
+        .module-list {
+            list-style: none;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .module-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .module-item:hover, .module-item.active {
+            background-color: rgba(56, 189, 248, 0.1);
+        }
+
+        .module-item.active {
+            border-left: 4px solid var(--accent);
+        }
+
+        .module-item .status {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: var(--border);
+        }
+
+        .module-item.completed .status {
+            background: var(--success);
+            color: #000;
+        }
+
+        /* Contenido del Módulo */
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .card h2 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .card p, .card ul {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+        }
+
+        /* Pro Tip Box */
+        .pro-tip {
+            background: rgba(234, 179, 8, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .pro-tip strong {
+            color: var(--warning);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Editor de Código Interactivo */
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            height: 350px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #00ff00;
+            font-family: var(--font-code);
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            resize: none;
+            font-size: 0.9rem;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            align-self: flex-start;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Menú Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            z-index: 20;
+            cursor: pointer;
+        }
+
+        /* Media Queries Responsivas */
+        @media (max-width: 768px) {
+            aside {
+                position: absolute;
+                height: 100%;
+                transform: translateX(-100%);
+            }
+
+            aside.open {
+                transform: translateX(0);
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .editor-container {
+                grid-template-columns: 1fr;
+                height: 500px;
+            }
+
+            main {
+                padding: 1rem;
+                padding-top: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="mobile-toggle" onclick="toggleSidebar()">☰ Módulos</button>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <h1>HTML Zero to Pro</h1>
+                <span id="progress-text">Progreso: 0%</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Buscar módulo..." oninput="filterModules()">
+            </div>
+            <ul class="module-list" id="module-list"></ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <article class="card">
+                <h2 id="module-title">Cargando...</h2>
+                <div id="module-content"></div>
+                
+                <div class="pro-tip" id="module-protip"></div>
+            </article>
+
+            <!-- Práctica Guiada -->
+            <section class="card">
+                <h2>Práctica Guiada</h2>
+                <p id="practice-instructions"></p>
+                <div class="editor-container">
+                    <textarea id="code-editor" oninput="updatePreview()" spellcheck="false"></textarea>
+                    <iframe id="preview"></iframe>
+                </div>
+                <button class="btn" style="margin-top: 1rem;" onclick="markAsCompleted()">Completar y Siguiente</button>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Estructura de Datos del Curso Completo
+        const courseData = [
+            {
+                id: 1,
+                title: "1. Fundamentos y Anatomía HTML",
+                content: `<p>HTML (HyperText Markup Language) es la columna vertebral de la web. Define la estructura de las páginas utilizando etiquetas compuestas por apertura, contenido y cierre.</p>
+                <ul>
+                    <li><code>&lt;!DOCTYPE html&gt;</code>: Declara que el documento es HTML5.</li>
+                    <li><code>&lt;html&gt;</code>: Elemento raíz del documento.</li>
+                    <li><code>&lt;head&gt;</code>: Contiene metadatos (no visibles directamente en la página).</li>
+                    <li><code>&lt;body&gt;</code>: Contiene el contenido visible para los usuarios.</li>
+                </ul>`,
+                proTip: "💡 <strong>Pro Tip:</strong> Utiliza siempre nombres de etiquetas y atributos en minúsculas. Aunque HTML es indulgente, escribir en minúsculas es el estándar estricto de la industria.",
+                initialCode: `<!DOCTYPE html>\n<html>\n<head>\n  <title>Mi Primera Página</title>\n</head>\n<body>\n  <h1>¡Hola Mundo!</h1>\n  <p>Estoy aprendiendo HTML de 0 a Pro.</p>\n</body>\n</html>`,
+                instructions: "Modifica el texto dentro de la etiqueta <h1> con tu nombre y añade un nuevo párrafo <p> debajo."
+            },
+            {
+                id: 2,
+                title: "2. Semántica Web en HTML5",
+                content: `<p>La semántica da significado a la estructura web. Ayuda a los motores de búsqueda (SEO) y a los lectores de pantalla a entender tu sitio.</p>
+                <ul>
+                    <li><code>&lt;header&gt;</code>: Encabezado del sitio o sección.</li>
+                    <li><code>&lt;nav&gt;</code>: Bloques de navegación.</li>
+                    <li><code>&lt;main&gt;</code>: Contenido principal único de la página.</li>
+                    <li><code>&lt;article&gt;</code> y <code>&lt;section&gt;</code>: Contenidos independientes o agrupaciones temáticas.</li>
+                    <li><code>&lt;footer&gt;</code>: Pie de página.</li>
+                </ul>`,
+                proTip: "💡 <strong>Pro Tip:</strong> Evita la 'Divitis' (usar <div> para todo). Si el elemento transmite una función (como una lista o menú), usa la etiqueta semántica correspondiente.",
+                initialCode: `<header>\n  <h1>Mi Sitio Web</h1>\n  <nav>\n    <a href="#">Inicio</a> | <a href="#">Contacto</a>\n  </nav>\n</header>\n<main>\n  <article>\n    <h2>Artículo Semántico</h2>\n    <p>El contenido va aquí...</p>\n  </article>\n</main>`,
+                instructions: "Añade un elemento <footer> debajo de <main> con un texto de derechos de autor."
+            },
+            {
+                id: 3,
+                title: "3. Formularios y Validaciones",
+                content: `<p>Los formularios permiten capturar datos del usuario. HTML5 ofrece tipos de entrada nativos con validaciones integradas sin JavaScript.</p>
+                <ul>
+                    <li>Atributos clave: <code>required</code>, <code>placeholder</code>, <code>pattern</code>.</li>
+                    <li>Tipos modernos: <code>type="email"</code>, <code>type="date"</code>, <code>type="number"</code>.</li>
+                    <li>Siempre vincula <code>&lt;label for="id"&gt;</code> con el <code>&lt;input id="id"&gt;</code> por accesibilidad.</li>
+                </ul>`,
+                proTip: "💡 <strong>Pro Tip:</strong> Añade siempre el atributo <code>autocomplete</code> a los inputs de formularios para mejorar la experiencia UX del usuario en móviles y escritorio.",
+                initialCode: `<form>\n  <label for="email">Correo:</label>\n  <input type="email" id="email" required placeholder="correo@ejemplo.com">\n  \n  <br><br>\n  <button type="submit">Enviar</button>\n</form>`,
+                instructions: "Añade un input de tipo 'password' obligatorio con su respectivo <label> antes del botón de envío."
+            },
+            {
+                id: 4,
+                title: "4. SEO Básico y Metadatos",
+                content: `<p>El SEO On-Page comienza en el <code>&lt;head&gt;</code> de HTML. Los metadatos correctos optimizan cómo los buscadores indizan tu sitio.</p>
+                <ul>
+                    <li><code>&lt;title&gt;</code>: Debe ser único y descriptivo (50-60 caracteres).</li>
+                    <li><code>meta description</code>: Resumen del contenido (150-160 caracteres).</li>
+                    <li><code>Open Graph (og:)</code>: Controla cómo se ve la página al compartirse en redes sociales.</li>
+                </ul>`,
+                proTip: "💡 <strong>Pro Tip:</strong> Mantén una jerarquía estricta de encabezados: solo UN <h1> por página, seguido ordenadamente por <h2>, <h3>, sin saltar niveles.",
+                initialCode: `<head>\n  <title>Aprender HTML | Curso Pro</title>\n  <meta name="description" content="Aprende desarrollo web profesional.">\n  <meta property="og:title" content="Curso HTML Pro">\n</head>\n<body>\n  <h1>Guía SEO On-Page</h1>\n</body>`,
+                instructions: "Añade un meta tag viewport para hacer que la página sea responsiva en dispositivos móviles."
+            },
+            {
+                id: 5,
+                title: "5. Accesibilidad Web (a11y)",
+                content: `<p>Una web accesible garantiza que personas con discapacidades puedan navegarla usando lectores de pantalla u otros dispositivos de asistencia.</p>
+                <ul>
+                    <li>Usa siempre el atributo <code>alt</code> en las imágenes (<code>&lt;img&gt;</code>).</li>
+                    <li>Usa atributos <code>aria-*</code> cuando el HTML nativo no sea suficiente.</li>
+                    <li>Asegúrate de que la navegación por teclado (tecla Tab) sea fluida.</li>
+                </ul>`,
+                proTip: "💡 <strong>Pro Tip:</strong> Si una imagen es meramente decorativa, usa un atributo `alt=\"\"` vacío para que los lectores de pantalla la ignoren intencionalmente.",
+                initialCode: `<button aria-label="Cerrar ventana">X</button>\n\n<img src="https://via.placeholder.com/150" alt="Descripción clara de la imagen">`,
+                instructions: "Crea una imagen con un 'alt' descriptivo y un botón con una etiqueta 'aria-label'."
+            }
+        ];
+
+        // Estado Global de la App
+        let currentModuleIndex = 0;
+        let completedModules = JSON.parse(localStorage.getItem('completed_modules')) || [];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            renderModuleList();
+            loadModule(currentModuleIndex);
+            updateProgressBar();
+        });
+
+        // Renderizar Lista de Módulos
+        function renderModuleList(filter = '') {
+            const listContainer = document.getElementById('module-list');
+            listContainer.innerHTML = '';
+
+            courseData.forEach((mod, index) => {
+                if (mod.title.toLowerCase().includes(filter.toLowerCase())) {
+                    const li = document.createElement('li');
+                    const isCompleted = completedModules.includes(mod.id);
+                    
+                    li.className = `module-item ${index === currentModuleIndex ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+                    li.onclick = () => {
+                        currentModuleIndex = index;
+                        loadModule(index);
+                        renderModuleList(filter);
+                        if(window.innerWidth <= 768) toggleSidebar();
+                    };
+
+                    li.innerHTML = `
+                        <span>${mod.title}</span>
+                        <span class="status">${isCompleted ? '✓' : 'Pendiente'}</span>
+                    `;
+                    listContainer.appendChild(li);
+                }
+            });
+        }
+
+        // Cargar Módulo Seleccionado
+        function loadModule(index) {
+            const mod = courseData[index];
+            document.getElementById('module-title').innerText = mod.title;
+            document.getElementById('module-content').innerHTML = mod.content;
+            document.getElementById('module-protip').innerHTML = mod.proTip;
+            document.getElementById('practice-instructions').innerText = mod.instructions;
+            
+            const editor = document.getElementById('code-editor');
+            editor.value = mod.initialCode;
+            updatePreview();
+        }
+
+        // Actualizar la Vista Previa del Editor
+        function updatePreview() {
+            const code = document.getElementById('code-editor').value;
+            const iframe = document.getElementById('preview');
+            const documentIframe = iframe.contentDocument || iframe.contentWindow.document;
+            
+            documentIframe.open();
+            documentIframe.write(code);
+            documentIframe.close();
+        }
+
+        // Marcar Módulo como Completado
+        function markAsCompleted() {
+            const currentId = courseData[currentModuleIndex].id;
+            if (!completedModules.includes(currentId)) {
+                completedModules.push(currentId);
+                localStorage.setItem('completed_modules', JSON.stringify(completedModules));
+            }
+
+            updateProgressBar();
+            
+            if (currentModuleIndex < courseData.length - 1) {
+                currentModuleIndex++;
+                loadModule(currentModuleIndex);
+                renderModuleList();
+            } else {
+                alert("🎉 ¡Felicidades! Has completado todos los módulos del curso.");
+                renderModuleList();
+            }
+        }
+
+        // Actualizar Barra de Progreso
+        function updateProgressBar() {
+            const percentage = Math.round((completedModules.length / courseData.length) * 100);
+            document.getElementById('progress-fill').style.width = `${percentage}%`;
+            document.getElementById('progress-text').innerText = `Progreso: ${percentage}%`;
+        }
+
+        // Buscador
+        function filterModules() {
+            const query = document.getElementById('search').value;
+            renderModuleList(query);
+        }
+
+        // Toggle Sidebar en Móviles
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
